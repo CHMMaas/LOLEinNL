@@ -15,3 +15,5 @@ For all cancers combined, the LOLE consistently decreased from 1989 to 2019. How
 **Interpretation**
 
 The decreasing LOLE estimates from 1989 to 2019 in the Netherlands indicates a reduced impact of a cancer diagnosis on life expectancy. Nevertheless, the prognosis of some malignancies remains poor in contemporary clinical practice, particularly those diagnosed with distant disease, indicating the need to advance cancer diagnosis and treatment. Life expectancy estimates complement relative survival estimates to assess progress in the effectiveness of oncological care.
+
+Supplementary to this paper the results are displayed in an online webapp: https://mdmerasmusmc.shinyapps.io/Calculator/.
