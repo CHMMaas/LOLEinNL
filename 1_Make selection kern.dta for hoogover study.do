@@ -73,6 +73,6 @@ set more off, perm
 								
 								drop diff
 								
-								save "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Data\kern0905.dta", replace
+								save "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Data\kern1508.dta", replace
 
 

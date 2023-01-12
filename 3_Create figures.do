@@ -66,13 +66,13 @@ graph combine PLOLE_ALL_female_with_stage.gph PLOLE_BLAD_female_with_stage.gph P
 		xcommon ycommon xsize(12) ysize(1.9)
 graph combine PLOLE_HPB_male_with_stage.gph PLOLE_KIDN_male_with_stage.gph PLOLE_LUNG_male_with_stage.gph ///
 		PLOLE_MEL_male_with_stage.gph PLOLE_OFT_male_with_stage.gph PLOLE_PROST_male_with_stage.gph ///
-		PLOLE_TEST_male_with_stage.gph PLOLE_THY_male_with_stage.gph, ///
-		col(8) name("FigS1c", replace) imargin(-7 2 -11 -4) graphregion(color(white)) iscale(3.6) ///
+		PLOLE_SCC_male_with_stage.gph PLOLE_TEST_male_with_stage.gph PLOLE_THY_male_with_stage.gph, ///
+		col(9) name("FigS1c", replace) imargin(-5 2 -11 -4) graphregion(color(white)) iscale(3.6) ///
 		xcommon ycommon xsize(12) ysize(1.9)
 graph combine PLOLE_HPB_female_with_stage.gph PLOLE_KIDN_female_with_stage.gph PLOLE_LUNG_female_with_stage.gph ///
 		PLOLE_MEL_female_with_stage.gph PLOLE_OFT_female_with_stage.gph PLOLE_PROST_female_with_stage.gph ///
-		PLOLE_TEST_female_with_stage.gph PLOLE_THY_female_with_stage.gph, ///
-		col(8) name("FigS1d", replace) imargin(-12 1 -5 -5) graphregion(color(white)) iscale(3.6) ///
+		PLOLE_SCC_female_with_stage.gph PLOLE_TEST_female_with_stage.gph PLOLE_THY_female_with_stage.gph, ///
+		col(9) name("FigS1d", replace) imargin(-5 3 0 0) graphregion(color(white)) iscale(3.6) ///
 		xcommon ycommon xsize(12) ysize(1.9)
 graph combine FigS1a FigS1b FigS1c FigS1d, ///
 		col(1) graphregion(color(white)) l1(Proportion of life lost (%)) ///
@@ -177,11 +177,11 @@ foreach gender_bool in 1 2 {
 /* Figure 6: x-axis change in PLOLE, y-axis PLOLE in 2019 by stage for 65-year-old patients */
 foreach gender_bool in 1 2 {
 	if (`gender_bool' == 1){
-		local diseases " "ALL" "BLAD" "CNS" "CRC" "ECS" "HN" "HPB" "KIDN" "LUNG" "MEL" "PROST" "TEST" "THY" "
+		local diseases " "ALL" "BLAD" "CNS" "CRC" "ECS" "HN" "HPB" "KIDN" "LUNG" "MEL" "PROST" "SCC" "TEST" "THY" "
 		local gender = "males"
 	}
 	else if (`gender_bool' == 2){
-		local diseases " "ALL" "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "THY" "
+		local diseases " "ALL" "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "SCC" "THY" "
 		local gender = "females"
 	}
 	

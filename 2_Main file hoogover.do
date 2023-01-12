@@ -21,17 +21,13 @@ local step = 1
 
 /* Abbreviations of cancer types */
 /* Choose if model should include stage, enter "yes" or "no" */
-local bool_stage = "with_stage"
-if ("`bool_stage'" == "without_stage"){
-	local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "SCC" "TEST" "THY" "ALL" "
-// 	local diseases " "THY" "
-}
-else if ("`bool_stage'" == "with_stage"){
-	local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "TEST" "THY" "ALL" "
-// 	local diseases " "THY" "
-}
+local bool_stage = "without_stage"
+// local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "SCC" "TEST" "THY" "ALL" "
+// local diseases " "ALL" "
+
 /* Run analysis for each disease */
 foreach disease in `diseases'{
+	display "`disease'"
 	/* The path in which the code is located */
 	local path_ado_files = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Code"
 	
@@ -48,7 +44,7 @@ foreach disease in `diseases'{
 	local start_year = 1989
 	local end_year = 2019
 	/* Maximum follow up date in patient file */
-	local max_fupdat = 2020
+	local max_fupdat = 2021
 	
 	/* Specify the minimum and maximum age */
 	local min_age = 18
@@ -74,23 +70,23 @@ foreach disease in `diseases'{
 			if ("`disease'" == "ALL"){
 				local df_baseline = 10
 				local df_spline_age = 3
-				local df_spline_year = 3
+				local df_spline_year = 2
 				local df_TD = 2
 			}
 			else if ("`disease'" == "BLAD"){
-				local df_baseline = 5
-				local df_spline_age = 3
+				local df_baseline = 4
+				local df_spline_age = 2
 				local df_spline_year = 1
-				local df_TD = 2
+				local df_TD = 1
 			}
 			else if ("`disease'" == "CERV"){
-				local df_baseline = 6
+				local df_baseline = 3
 				local df_spline_age = 1
 				local df_spline_year = 1
 				local df_TD = 0
 			}
 			else if ("`disease'" == "CNS"){
-				local df_baseline = 7
+				local df_baseline = 8
 				local df_spline_age = 3
 				local df_spline_year = 3
 				local df_TD = 2
@@ -104,7 +100,7 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "ECS"){
 				local df_baseline = 8
 				local df_spline_age = 3
-				local df_spline_year = 3
+				local df_spline_year = 2
 				local df_TD = 1
 			}
 			else if ("`disease'" == "ENDO"){
@@ -116,26 +112,26 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "FBRE"){
 				local df_baseline = 10
 				local df_spline_age = 3
-				local df_spline_year = 2
+				local df_spline_year = 1
 				local df_TD = 0
 			}
 			else if ("`disease'" == "HN"){
 				local df_baseline = 5
 				local df_spline_age = 3
-				local df_spline_year = 1
-				local df_TD = 2
+				local df_spline_year = 2
+				local df_TD = 1
 			}
 			else if ("`disease'" == "HPB"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 1
+				local df_spline_year = 2
 				local df_TD = 2
 			}
 			else if ("`disease'" == "KIDN"){
-				local df_baseline = 3
-				local df_spline_age = 3
+				local df_baseline = 4
+				local df_spline_age = 1
 				local df_spline_year = 2
-				local df_TD = 1
+				local df_TD = 2
 			}
 			else if ("`disease'" == "LUNG"){
 				local df_baseline = 9
@@ -180,15 +176,15 @@ foreach disease in `diseases'{
 				local df_TD = 0
 			}
 		}
-		else if ("`bool_stage'" == "with_stage" & "`disease'" != "SCC"){
+		else if ("`bool_stage'" == "with_stage"){
 			if ("`disease'" == "ALL"){
-				local df_baseline = 6
+				local df_baseline = 7
 				local df_spline_age = 3
-				local df_spline_year = 3
+				local df_spline_year = 2
 				local df_TD = 1
 			}
 			else if ("`disease'" == "BLAD"){
-				local df_baseline = 5
+				local df_baseline = 4
 				local df_spline_age = 2
 				local df_spline_year = 1
 				local df_TD = 1
@@ -214,8 +210,8 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "ECS"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 1
-				local df_TD = 2
+				local df_spline_year = 2
+				local df_TD = 1
 			}
 			else if ("`disease'" == "ENDO"){
 				local df_baseline = 3
@@ -238,7 +234,7 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "HPB"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 1
+				local df_spline_year = 2
 				local df_TD = 2
 			}
 			else if ("`disease'" == "KIDN"){
@@ -268,8 +264,14 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "PROST"){
 				local df_baseline = 5
 				local df_spline_age = 2
-				local df_spline_year = 2
-				local df_TD = 2
+				local df_spline_year = 3
+				local df_TD = 1
+			}
+			else if ("`disease'" == "SCC"){
+				local df_baseline = 2
+				local df_spline_age = 2
+				local df_spline_year = 1
+				local df_TD = 0
 			}
 			else if ("`disease'" == "TEST"){
 				local df_baseline = 4
@@ -285,6 +287,7 @@ foreach disease in `diseases'{
 			}
 		}
 	}
+
 	
 	/* Calendar years to display in results */
 	local year1 = 1990

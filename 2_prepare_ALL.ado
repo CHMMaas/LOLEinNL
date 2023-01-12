@@ -21,8 +21,9 @@ capture drop *
 *----------------------------*
 
 /* open selected patients */	use "`data_path'\\patient_data.dta", clear
+								display _N
 
-/* BLAD */						quietly keep if tumsoort==712310 | tumsoort==712320 | tumsoort==713310 | ///
+/* BLAD */						keep if tumsoort==712310 | tumsoort==712320 | tumsoort==713310 | ///
 								tumsoort==713330 | tumsoort==713340 | ///
 								tumsoort==719310 | tumsoort==719330 | /// 
 /* CERV */						(tumsoort==603300 & gesl == 2) | ///
@@ -60,8 +61,7 @@ capture drop *
 /* TEST */						((tumsoort==703310 | tumsoort==703320) & gesl == 1) | ///
 /* THY */						tumsoort==901310 | tumsoort==901320 | ///
 								tumsoort==901330 | tumsoort==901340 | tumsoort==901350
-								
-								tab geslacht
+								display _N							
 								
 /* compress */					quietly compress	
 								save "`results_data_path'\\`disease'_descriptives_`bool_stage'.dta", replace

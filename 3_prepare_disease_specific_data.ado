@@ -23,47 +23,33 @@ capture drop *
 display "Set survival data"
 quietly use "`results_data_path'\\`disease'_descriptives_`bool_stage'.dta", clear
 
-/* keep vars for analyses */	if ("`bool_stage'" == "without_stage"){	
-									if ("`disease'" == "SCC"){
-										/* no stage in model for SCC */					
-										quietly gen stage2 = stage==1
-										quietly gen stage3 = stage==2
-										/* Unknown is localized (stage 1) for SCC */
-										quietly gen stage4 = 0
-									}
-/* without stage */				quietly keep rn patid lft geslacht jaar ///
-												age incdat fupdat overl dood
+/* keep vars for analyses */	if ("`disease'" == "CNS"){
+									/* For CNS, don't use stage, but degree 
+										reference category is degree 1 and 2, 
+										so stage1 not created */
+									quietly gen stage2 = grade=="Graad 3" 
+									quietly gen stage3 = grade=="Graad 4"
+									quietly gen stage4 = grade=="Onbekend"
 								}
-								else if ("`bool_stage'" == "with_stage"){							
-								    if ("`disease'" == "BLAD"){
-										/* change unknown bladder to localized */
-									    replace stage = 0 if (tumsoort==713310 & stage==9) 
-									}
-									
-									if ("`disease'" == "ALL"){
-										/* drop SCC when doing stage analysis */
-										quietly drop if tumsoort==403310 | tumsoort==403330 | tumsoort==403320 
-									}
-									
-									if ("`disease'" == "CNS"){
-										/* For CNS, don't use stage, but degree 
-											reference category is degree 1 and 2, 
-											so stage1 not created */
-										quietly gen stage2 = grade=="Graad 3" 
-										quietly gen stage3 = grade=="Graad 4"
-										quietly gen stage4 = grade=="Onbekend"
-									}
-									else{
-										/* Ref category is Localized, 
-											so stage1 not created */
-										quietly gen stage2 = stage==1 
-										quietly gen stage3 = stage==2
-										quietly gen stage4 = stage==9
-									}
-/* with stage */						quietly keep rn patid lft geslacht jaar age ///
-												incdat fupdat overl dood ///
-												stage2 stage3 stage4 tumsoort
+								else{
+									/* Ref category is Localized, 
+										so stage1 not created */
+									quietly gen stage2 = stage==1 
+									quietly gen stage3 = stage==2
+									quietly gen stage4 = stage==9
 								}
+/* change unknown bladder 
+to localized */					if ("`disease'" == "BLAD"){
+									replace stage = 0 if (tumsoort==713310 & stage==9) 
+								}
+/* Unknown is localized 
+(stage 1) for SCC */ 			if ("`disease'" == "ALL" | "`disease'" == "SCC"){
+									replace stage4 = 0 if ((tumsoort==403310 | tumsoort==403330 | tumsoort==403320) & stage==9)
+								}
+								
+/* keep some variables */ 		quietly keep rn patid lft geslacht jaar age ///
+										incdat fupdat overl dood ///
+										stage2 stage3 stage4 tumsoort
 
 /* compress */					quietly compress
 								quietly save "`results_data_path'\\`disease'_descriptives_`bool_stage'.dta", replace
