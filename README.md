@@ -1,6 +1,6 @@
 # The evolution of the loss of life expectancy in patients with solid malignancies: a population-based study in the Netherlands, 1989-2019
 
-### Authors: Carolien C.H.M. Maas, David van Klaveren, Otto Visser, Prof Matthias A.W. Merkx, Prof Hester F. Lingsma, Prof Valery E.P.P. Lemmens, Avinash G. Dinmohamed, PhD
+### Authors: Carolien C.H.M. Maas, David van Klaveren, Otto Visser, Prof Matthias A.W. Merkx, Prof Hester F. Lingsma, Prof Valery E.P.P. Lemmens, Avinash G. Dinmohamed
 
 **Background**
 Loss of life expectancy (LOLE) may provide more intuitive information on the impact of cancer than relative survival over a fixed time horizon (e.g., 5-year relative survival). We aimed to assess the evolution of the LOLE using a nationwide, population-based cohort including patients diagnosed with one of 17 most frequent solid malignancies.
