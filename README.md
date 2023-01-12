@@ -17,4 +17,4 @@ The evolution of LOLE substantially varies across cancer type, age, and disease 
 **Funding**
 None.
 
-Supplementary to this paper the results are displayed in an online webapp: https://mdmerasmusmc.shinyapps.io/LOLECalculator/.
+Supplementary to this paper the results are displayed in an online webapp: https://mdmerasmusmc.shinyapps.io/LOLECalculator/. Github: https://github.com/CHMMaas/CalculatorLOLEinNL
