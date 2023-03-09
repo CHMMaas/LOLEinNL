@@ -21,9 +21,10 @@ local step = 1
 
 /* Abbreviations of cancer types */
 /* Choose if model should include stage, enter "yes" or "no" */
-local bool_stage = "without_stage"
+local bool_stage = "with_stage"
+
 // local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "SCC" "TEST" "THY" "ALL" "
-// local diseases " "ALL" "
+local diseases " "MEL" "
 
 /* Run analysis for each disease */
 foreach disease in `diseases'{
@@ -70,7 +71,7 @@ foreach disease in `diseases'{
 			if ("`disease'" == "ALL"){
 				local df_baseline = 10
 				local df_spline_age = 3
-				local df_spline_year = 2
+				local df_spline_year = 3
 				local df_TD = 2
 			}
 			else if ("`disease'" == "BLAD"){
@@ -95,12 +96,12 @@ foreach disease in `diseases'{
 				local df_baseline = 6
 				local df_spline_age = 3
 				local df_spline_year = 2
-				local df_TD = 1
+				local df_TD = 0
 			}
 			else if ("`disease'" == "ECS"){
 				local df_baseline = 8
 				local df_spline_age = 3
-				local df_spline_year = 2
+				local df_spline_year = 3
 				local df_TD = 1
 			}
 			else if ("`disease'" == "ENDO"){
@@ -112,7 +113,7 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "FBRE"){
 				local df_baseline = 10
 				local df_spline_age = 3
-				local df_spline_year = 1
+				local df_spline_year = 2
 				local df_TD = 0
 			}
 			else if ("`disease'" == "HN"){
@@ -124,13 +125,13 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "HPB"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 2
+				local df_spline_year = 3
 				local df_TD = 2
 			}
 			else if ("`disease'" == "KIDN"){
 				local df_baseline = 4
 				local df_spline_age = 1
-				local df_spline_year = 2
+				local df_spline_year = 3
 				local df_TD = 2
 			}
 			else if ("`disease'" == "LUNG"){
@@ -160,8 +161,8 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "SCC"){
 				local df_baseline = 2
 				local df_spline_age = 2
-				local df_spline_year = 1
-				local df_TD = 1
+				local df_spline_year = 2
+				local df_TD = 0
 			}
 			else if ("`disease'" == "TEST"){
 				local df_baseline = 2
@@ -180,13 +181,13 @@ foreach disease in `diseases'{
 			if ("`disease'" == "ALL"){
 				local df_baseline = 7
 				local df_spline_age = 3
-				local df_spline_year = 2
-				local df_TD = 1
+				local df_spline_year = 3
+				local df_TD = 0
 			}
 			else if ("`disease'" == "BLAD"){
 				local df_baseline = 4
 				local df_spline_age = 2
-				local df_spline_year = 1
+				local df_spline_year = 2
 				local df_TD = 1
 			}
 			else if ("`disease'" == "CERV"){
@@ -198,7 +199,7 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "CNS"){
 				local df_baseline = 7
 				local df_spline_age = 3
-				local df_spline_year = 1
+				local df_spline_year = 3
 				local df_TD = 2
 			}
 			else if ("`disease'" == "CRC"){
@@ -210,8 +211,8 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "ECS"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 2
-				local df_TD = 1
+				local df_spline_year = 3
+				local df_TD = 2
 			}
 			else if ("`disease'" == "ENDO"){
 				local df_baseline = 3
@@ -228,32 +229,32 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "HN"){
 				local df_baseline = 5
 				local df_spline_age = 3
-				local df_spline_year = 1
-				local df_TD = 2
+				local df_spline_year = 2
+				local df_TD = 1
 			}
 			else if ("`disease'" == "HPB"){
 				local df_baseline = 9
 				local df_spline_age = 3
-				local df_spline_year = 2
-				local df_TD = 2
+				local df_spline_year = 3
+				local df_TD = 0
 			}
 			else if ("`disease'" == "KIDN"){
 				local df_baseline = 3
 				local df_spline_age = 2
-				local df_spline_year = 1
-				local df_TD = 1
+				local df_spline_year = 3
+				local df_TD = 2
 			}
 			else if ("`disease'" == "LUNG"){
 				local df_baseline = 4
 				local df_spline_age = 3
 				local df_spline_year = 3
-				local df_TD = 1
+				local df_TD = 0
 			}
 			else if ("`disease'" == "MEL"){
 				local df_baseline = 3
 				local df_spline_age = 1
 				local df_spline_year = 2
-				local df_TD = 1
+				local df_TD = 2
 			}
 			else if ("`disease'" == "OFT"){
 				local df_baseline = 6
@@ -270,7 +271,7 @@ foreach disease in `diseases'{
 			else if ("`disease'" == "SCC"){
 				local df_baseline = 2
 				local df_spline_age = 2
-				local df_spline_year = 1
+				local df_spline_year = 2
 				local df_TD = 0
 			}
 			else if ("`disease'" == "TEST"){

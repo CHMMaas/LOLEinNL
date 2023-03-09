@@ -85,6 +85,7 @@ forval df_spline_year = `spline_min'/`spline_max' {
 		quietly rcsgen age, df(`df_spline_age') gen(sag) orthog
 		/* spline variables for year */				
 		quietly rcsgen jaar, df(`df_spline_year') gen(syr) orthog
+		
 		/* create dummy variable for sex */			
 		gen fem = geslacht==2 
 
@@ -103,18 +104,13 @@ forval df_spline_year = `spline_min'/`spline_max' {
 		quietly drop _lft _jaar _merge
 
 		/* Compute interactions */
+		quietly gen femsyr1 = fem*syr1
 		forval i = 1/`df_spline_age'{
 			/* interaction age and gender */
 			quietly gen sag`i'fem = sag`i'*fem
-			forval j = 1/`df_spline_year'{
-				/* only add interaction with gender once */
-				if (`i' == 1){ 							
-					/* interaction year and gender */
-					quietly gen syr`j'fem = syr`j'*fem
-				}
-				/* interaction year and age at diagnosis */
-				quietly gen syr`j'sag`i' = syr`j'*sag`i' 
-			}
+			
+			/* interaction year and age at diagnosis */
+			quietly gen sag`i'syr1 = sag`i'*syr1 
 		}
 		
 		if ("`bool_stage'" == "with_stage"){
@@ -124,9 +120,8 @@ forval df_spline_year = `spline_min'/`spline_max' {
 				forval age_val = 1/`df_spline_age'{
 					quietly gen stage`stage_val'sag`age_val' = stage`stage_val'*sag`age_val'
 				}
-				forval year_val = 1/`df_spline_year'{
-					quietly gen stage`stage_val'syr`year_val' = stage`stage_val'*syr`year_val'
-				}
+				quietly gen stage`stage_val'syr1 = stage`stage_val'*syr1 // linear interaction with year
+				quietly gen stage`stage_val'fem = stage`stage_val'*fem
 			}
 		}
 		

@@ -20,32 +20,32 @@ quietly capture drop *
 display "Obtain patients to predict"
 
 /* Compute data set with all combinations of 
-  - gender (1, 2);
+  - sex (1, 2);
   - year of diagnosis (1989 - 2018);
   - age (50-90) */
 quietly cd "`strs_path'"
 quietly capture drop *
 local r_age = `max_year' - `min_year' + 1
-local r_gender = (`max_age' - `min_age' + 1)*`r_age'
+local r_sex = (`max_age' - `min_age' + 1)*`r_age'
 if ("`disease'" == "CERV" | "`disease'" == "OFT" | "`disease'" == "ENDO" | ///
 	"`disease'" == "FBRE" | "`disease'" == "PROST" | "`disease'" == "TEST"){
-	local N = `r_gender'
+	local N = `r_sex'
 	quietly set obs `N'
 	if ("`disease'" == "PROST" | "`disease'" == "TEST"){
 		/* Males */
-		quietly egen geslacht = seq(), f(1) t(1) b(`r_gender')
+		quietly egen geslacht = seq(), f(1) t(1) b(`r_sex')
 		lab def sexlbl 1 "Males", modify
 	}
 	else{
 		/* Females */
-		quietly egen geslacht = seq(), f(2) t(2) b(`r_gender')
+		quietly egen geslacht = seq(), f(2) t(2) b(`r_sex')
 		lab def sexlbl 2 "Females", modify
 	}
 }			
 else{
-	local N = `r_gender'*2
+	local N = `r_sex'*2
 	quietly set obs `N'
-	quietly egen geslacht = seq(), f(1) t(2) b(`r_gender')
+	quietly egen geslacht = seq(), f(1) t(2) b(`r_sex')
 	lab def sexlbl 1 "Males" 2 "Females", modify
 }
 lab val geslacht sexlbl
@@ -58,18 +58,13 @@ quietly rcsgen age, df(`spline_max') gen(sag) orthog
 quietly rcsgen jaar, df(`spline_max') gen(syr) orthog
 
 /* Compute interactions */
+quietly gen femsyr1 = fem*syr1 
 forval i = 1/`spline_max'{
-	/* interaction age and gender */
+	/* interaction age and sex */
 	quietly gen sag`i'fem = sag`i'*fem 
-	forval j = 1/`spline_max'{
-		/* only add interaction with gender once */
-		if (`i' == 1){ 							
-			/* interaction year and gender */
-			quietly gen syr`j'fem = syr`j'*fem  
-		}
-		/* interaction year and age at diagnosis */
-		quietly gen syr`j'sag`i' = syr`j'*sag`i' 
-	}
+	
+	/* linear interaction year and age at diagnosis */
+	quietly gen sag`i'syr1 = sag`i'*syr1
 }
 
 /* set _t and _d to missing, 
@@ -114,9 +109,7 @@ else if ("`bool_stage'" == "with_stage"){
 		forval age_val = 1/`spline_max'{
 			quietly gen stage`stage_val'sag`age_val' = stage`stage_val'*sag`age_val'
 		}
-		forval year_val = 1/`spline_max'{
-			quietly gen stage`stage_val'syr`year_val' = stage`stage_val'*syr`year_val'
-		}
+		quietly gen stage`stage_val'syr1 = stage`stage_val'*syr1 // linear interaction with year
 		quietly gen stage`stage_val'fem = stage`stage_val'*fem
 	}
 	

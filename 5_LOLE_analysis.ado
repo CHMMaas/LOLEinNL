@@ -36,16 +36,16 @@ if ("`bool_stage'" == "with_stage"){
 /* Fit the flexible parametric survival model*/
 quietly cd "`strs_path'"
 if (`df_TD' == 0 & "`bool_stage'" == "without_stage"){
-    quietly stpm2 fem sag* syr*, scale(hazard) df(`df_baseline') bhazard(rate) 
+    stpm2 syr* fem* sag*, scale(hazard) df(`df_baseline') bhazard(rate) 
 }
 else if (`df_TD' == 0 & "`bool_stage'" == "with_stage"){
-    quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`df_baseline') bhazard(rate)
+    stpm2 syr* fem* sag* stage*, scale(hazard) df(`df_baseline') bhazard(rate)
 }
 else if (`df_TD' > 0 & "`bool_stage'" == "without_stage"){
-    quietly stpm2 fem sag* syr*, scale(hazard) df(`df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+    stpm2 syr* fem* sag*, scale(hazard) df(`df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`df_TD')
 }
 else if (`df_TD' > 0 & "`bool_stage'" == "with_stage"){
-    quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+    stpm2 syr* fem* sag* stage*, scale(hazard) df(`df_baseline') bhazard(rate) tvc(syr* fem* sag* stage*) dftvc(`df_TD')
 }
 
 /* Predict LOLE for the cohort
@@ -61,7 +61,7 @@ if ("`bool_CI'" == "no"){
 }
 if ("`bool_CI'" == "yes"){
     display "PREDICT WITH CONFIDENCE INTERVAL"
-	quietly predict ll, lifelost mergeby(_jaar geslacht _lft) attage(_lft) attyear(_jaar) diagage(age) diagyear(jaar) nodes(40) tinf(`tinf_val') ///
+	predict ll, lifelost mergeby(_jaar geslacht _lft) attage(_lft) attyear(_jaar) diagage(age) diagyear(jaar) nodes(40) tinf(`tinf_val') ///
 	using(nedmort - LOLE) stub(surv) survprob(p) maxage(`max_CBS_age') maxyear(`max_fupdat') tcond(`years_cond') ci
 
 	lab var survobs_lci "95% CI lower"

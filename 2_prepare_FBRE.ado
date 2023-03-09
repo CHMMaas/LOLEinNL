@@ -21,11 +21,11 @@ capture drop *
 *----------------------------*
 
 /* open selected patients */	use "`data_path'\\patient_data.dta", clear
+								display _N
 
-/* keep FBRE */					quietly keep if tumsoort==501300
+/* keep FBRE */					quietly keep if (tumsoort==501300 & geslacht==2)
+								display _N
 								
-/* only female breast cancer */ capture drop if gesl == 1
-
 /* compress */					quietly compress	
 								save "`results_data_path'\\`disease'_descriptives_`bool_stage'.dta", replace
 end

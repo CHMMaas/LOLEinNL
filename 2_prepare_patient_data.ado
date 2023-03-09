@@ -58,7 +58,7 @@ display "Select patient population"
 								display "Drop gender == 3"
 /* omit transgender etc. */		drop if gesl == 3
 								display _N
-
+								
 /* label sex */					quietly rename gesl geslacht
 								lab def sexlbl 1 "Males" 2 "Females", modify
 								lab val geslacht sexlbl

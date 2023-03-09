@@ -26,6 +26,8 @@ capture drop *
 								tumsoort==713330 | tumsoort==713340 | ///
 								tumsoort==719310 | tumsoort==719330
 																	
+								display _N
+								
 /* compress */					quietly compress	
 								save "`results_data_path'\\`disease'_descriptives_`bool_stage'.dta", replace
 end

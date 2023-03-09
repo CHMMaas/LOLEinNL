@@ -86,6 +86,7 @@ local strs_path = "G:\IKNL\Registratie en Onderzoek\stata\strs"
 // quietly cd "`path_ado_files'"
 // run 2_prepare_`disease'.ado
 // prepare_`disease' "`bool_stage'" "`data_path'" "`results_data_path'" "`disease'"
+// display _N
 //
 // /* set survival data */
 // quietly cd "`path_ado_files'"				
@@ -95,68 +96,68 @@ local strs_path = "G:\IKNL\Registratie en Onderzoek\stata\strs"
 // 								"`spline_min'" "`spline_max'" 			///
 // 								"`time_of_cure'" "`disease'"
 //
-// /* create file with artificial patients to estimate predictions for */
+// /* create file with artificial patients (all combinations of patient characteristics) to estimate predictions for */
 // quietly cd "`path_ado_files'"
 // run 4_create_predict_file.ado
 // create_predict_file "`max_since_years'" "`bool_CI'" "`bool_stage'" "`spline_min'" "`spline_max'" "`strs_path'" ///
 // 				"`results_data_path'" "`disease'" ///
 // 				"`start_year'" "`end_year'" "`min_age'" "`max_age'"
-//
-// if ("`bool_SA'" == "no"){
-// 	/* Fit flexible parametric survival model and make predictions */ 
-// 	quietly cd "`path_ado_files'"
-// 	run 5_LOLE_analysis.ado
-//	
-// 	if (`max_since_years' == 0) {
-// 		/* LOLE */
-// 		LOLE_analysis "0" "`bool_CI'" "`bool_stage'" "`df_spline_year'" "`df_spline_age'" "`df_baseline'" "`df_TD'" ///
-// 					"`max_CBS_age'" "`max_fupdat'" 					///
-// 					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
-// 					"`age1'" "`age2'" "`age3'" "`age4'" 			///
-// 					"`min_age'" "`max_age'" 						///
-// 					"`year1'" "`year2'" "`year3'" "`year4'" 		///
-// 					"`start_year'" "`end_year'" "`max_since_years'" "single"
-// 	}
-// 	else if (`max_since_years' > 0) {
-// 		/* Conditional LOLE */
-// 		forval i = 0(`step')`max_since_years'{
-// 		    display "`i'-year conditional LOLE"
-// 			LOLE_analysis "`i'" "`bool_CI'" "`bool_stage'" "`df_spline_year'" "`df_spline_age'" "`df_baseline'" "`df_TD'" ///
-// 					"`max_CBS_age'" "`max_fupdat'" 				///
-// 					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
-// 					"`age1'" "`age2'" "`age3'" "`age4'" 		///
-// 					"`min_age'" "`max_age'" 					///
-// 					"`year1'" "`year2'" "`year3'" "`year4'" 	///
-// 					"`start_year'" "`end_year'" "`max_since_years'" "multiple"
-// 		}
-// 	}
-//	
-// 	/* Make figures */
-// 	quietly cd "`path_ado_files'"
-// 	run 6_make_figures_LOLE.ado
-// 	make_figures_LOLE "`disease'" "`bool_CI'" "`bool_stage'" 	///
-// 				"`age1'" "`age2'" "`age3'" "`age4'" 			///
-// 				"`min_age'" "`max_age'" 						///
-// 				"`year1'" "`year2'" "`year3'" "`year4'"			///
-// 				"`start_year'" "`end_year'" 					///
-// 				"`results_data_path'" 							///
-// 				"`max_since_years'" "`step'"
-// }
-// else if ("`bool_SA'" == "yes"){
-//     /* Sensitivity analysis */
-// 	quietly cd "`path_ado_files'"
-// 	run 7_sensitivity_analysis.ado
-// 	sensitivity_analysis "`baseline_min'" "`baseline_max'" 	///
-// 				"`spline_min'" "`spline_max'" 				///
-// 				"`TD_min'" "`TD_max'" 						///
-// 				"`df_spline_year'" "`df_spline_age'" 		///
-// 				"`df_baseline'" "`df_TD'" 					///
-// 				"`max_CBS_age'" "`max_fupdat'" "without_CI" ///
-// 				"`bool_stage'" "`strs_path'"				/// 
-// 				"`results_data_path'" "`SA_path'" 			///
-// 				"`path_ado_files'" "`disease'" 				///
-// 				"`age1'" "`age2'" "`age3'" "`age4'" 		///
-// 				"`start_year'" "`end_year'"	
-// }
+
+if ("`bool_SA'" == "no"){
+	/* Fit flexible parametric survival model and make predictions */ 
+	quietly cd "`path_ado_files'"
+	run 5_LOLE_analysis.ado
+	
+	if (`max_since_years' == 0) {
+		/* LOLE */
+		LOLE_analysis "0" "`bool_CI'" "`bool_stage'" "`df_spline_year'" "`df_spline_age'" "`df_baseline'" "`df_TD'" ///
+					"`max_CBS_age'" "`max_fupdat'" 					///
+					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
+					"`age1'" "`age2'" "`age3'" "`age4'" 			///
+					"`min_age'" "`max_age'" 						///
+					"`year1'" "`year2'" "`year3'" "`year4'" 		///
+					"`start_year'" "`end_year'" "`max_since_years'" "single"
+	}
+	else if (`max_since_years' > 0) {
+		/* Conditional LOLE */
+		forval i = 7(`step')`max_since_years'{
+		    display "`i'-year conditional LOLE"
+			LOLE_analysis "`i'" "`bool_CI'" "`bool_stage'" "`df_spline_year'" "`df_spline_age'" "`df_baseline'" "`df_TD'" ///
+					"`max_CBS_age'" "`max_fupdat'" 				///
+					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
+					"`age1'" "`age2'" "`age3'" "`age4'" 		///
+					"`min_age'" "`max_age'" 					///
+					"`year1'" "`year2'" "`year3'" "`year4'" 	///
+					"`start_year'" "`end_year'" "`max_since_years'" "multiple"
+		}
+	}
+	
+	/* Make figures */
+	quietly cd "`path_ado_files'"
+	run 6_make_figures_LOLE.ado
+	make_figures_LOLE "`disease'" "`bool_CI'" "`bool_stage'" 	///
+				"`age1'" "`age2'" "`age3'" "`age4'" 			///
+				"`min_age'" "`max_age'" 						///
+				"`year1'" "`year2'" "`year3'" "`year4'"			///
+				"`start_year'" "`end_year'" 					///
+				"`results_data_path'" 							///
+				"`max_since_years'" "`step'"
+}
+else if ("`bool_SA'" == "yes"){
+    /* Sensitivity analysis */
+	quietly cd "`path_ado_files'"
+	run 7_sensitivity_analysis.ado
+	sensitivity_analysis "`baseline_min'" "`baseline_max'" 	///
+				"`spline_min'" "`spline_max'" 				///
+				"`TD_min'" "`TD_max'" 						///
+				"`df_spline_year'" "`df_spline_age'" 		///
+				"`df_baseline'" "`df_TD'" 					///
+				"`max_CBS_age'" "`max_fupdat'" "without_CI" ///
+				"`bool_stage'" "`strs_path'"				/// 
+				"`results_data_path'" "`SA_path'" 			///
+				"`path_ado_files'" "`disease'" 				///
+				"`age1'" "`age2'" "`age3'" "`age4'" 		///
+				"`start_year'" "`end_year'"	
+}
 
 end

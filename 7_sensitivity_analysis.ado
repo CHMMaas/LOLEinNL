@@ -41,16 +41,16 @@ forval try_df_baseline = `baseline_min'/`baseline_max' {
 	
 	/* Train model */
 	if (`df_TD' == 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`try_df_baseline') bhazard(rate) 
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`try_df_baseline') bhazard(rate) 
 	}
 	else if (`df_TD' == 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`try_df_baseline') bhazard(rate)
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`try_df_baseline') bhazard(rate)
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`try_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`try_df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`df_TD')
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`try_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`try_df_baseline') bhazard(rate) tvc(syr* fem* sag* stage*) dftvc(`df_TD')
 	}
 	
 	// continue if convergence not achieved
@@ -84,16 +84,16 @@ forval try_df_spline_age = `spline_min'/`spline_max' {
 	
 	/* Train model */
 	if (`df_TD' == 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
 	}
 	else if (`df_TD' == 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`df_TD')
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag* stage*) dftvc(`df_TD')
 	}
 	
 	// continue if convergence not achieved
@@ -127,16 +127,16 @@ forval try_df_spline_year = `spline_min'/`spline_max' {
 	
 	/* Train model */
 	if (`df_TD' == 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
 	}
 	else if (`df_TD' == 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`df_TD')
 	}
 	else if (`df_TD' > 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag* stage*) dftvc(`df_TD')
 	}
 	
 	// continue if convergence not achieved
@@ -170,16 +170,16 @@ forval try_df_TD = `TD_min'/`TD_max' {
 	
 	/* Train model */
 	if (`try_df_TD' == 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) 
 	}
 	else if (`try_df_TD' == 0 & "`bool_stage'" == "with_stage"){
-		capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
+		capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate)
 	}
 	else if (`try_df_TD' > 0 & "`bool_stage'" == "without_stage"){
-		capture noisily: quietly stpm2 fem sag* syr*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`try_df_TD')
+		capture noisily: quietly stpm2 syr* fem* sag*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`try_df_TD')
 	}
 	else if (`try_df_TD' > 0 & "`bool_stage'" == "with_stage"){
-	    capture noisily: quietly stpm2 fem sag* syr* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(fem sag* syr*) dftvc(`try_df_TD')
+	    capture noisily: quietly stpm2 syr* fem* sag* stage*, scale(hazard) df(`chosen_df_baseline') bhazard(rate) tvc(syr* fem* sag* stage*) dftvc(`try_df_TD')
 	}
 	
 	if (_rc+(e(converge)==0) > 0){
