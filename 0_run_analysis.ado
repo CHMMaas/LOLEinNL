@@ -68,40 +68,40 @@ display "Max. df time-dep:   `TD_max'"
 /* Directory that is the same for all diseases: */
 local strs_path = "G:\IKNL\Registratie en Onderzoek\stata\strs"
 
-// /* Prepare general population
-//    do not smooth general population */
-// quietly cd "`path_ado_files'"
-// run 1_prepare_general_population.ado
-// prepare_general_population "0" "`max_CBS_age'" "`strs_path'"
-//
-// /* Select patient population */
-// quietly cd "`path_ado_files'"
-// run 2_prepare_patient_data.ado
-// prepare_patient_data "`data_path'" "`results_data_path'" 			///
-// 						"`start_year'" "`end_year'" "`max_fupdat'" 	///
-// 						"`min_age'" "`max_age'" "`disease'"
-//
-// /* prepare disease specific data */
-// display "Select specific disease"
-// quietly cd "`path_ado_files'"
-// run 2_prepare_`disease'.ado
-// prepare_`disease' "`bool_stage'" "`data_path'" "`results_data_path'" "`disease'"
-// display _N
-//
-// /* set survival data */
-// quietly cd "`path_ado_files'"				
-// run 3_prepare_disease_specific_data.ado
-// prepare_disease_specific_data "`bool_stage'" "`max_CBS_age'" 			///
-// 								"`strs_path'" "`results_data_path'"  	///
-// 								"`spline_min'" "`spline_max'" 			///
-// 								"`time_of_cure'" "`disease'"
-//
-// /* create file with artificial patients (all combinations of patient characteristics) to estimate predictions for */
-// quietly cd "`path_ado_files'"
-// run 4_create_predict_file.ado
-// create_predict_file "`max_since_years'" "`bool_CI'" "`bool_stage'" "`spline_min'" "`spline_max'" "`strs_path'" ///
-// 				"`results_data_path'" "`disease'" ///
-// 				"`start_year'" "`end_year'" "`min_age'" "`max_age'"
+/* Prepare general population
+   do not smooth general population */
+quietly cd "`path_ado_files'"
+run 1_prepare_general_population.ado
+prepare_general_population "0" "`max_CBS_age'" "`strs_path'"
+
+/* Select patient population */
+quietly cd "`path_ado_files'"
+run 2_prepare_patient_data.ado
+prepare_patient_data "`data_path'" "`results_data_path'" 			///
+						"`start_year'" "`end_year'" "`max_fupdat'" 	///
+						"`min_age'" "`max_age'" "`disease'"
+
+/* prepare disease specific data */
+display "Select specific disease"
+quietly cd "`path_ado_files'"
+run 2_prepare_`disease'.ado
+prepare_`disease' "`bool_stage'" "`data_path'" "`results_data_path'" "`disease'"
+display _N
+
+/* set survival data */
+quietly cd "`path_ado_files'"				
+run 3_prepare_disease_specific_data.ado
+prepare_disease_specific_data "`bool_stage'" "`max_CBS_age'" 			///
+								"`strs_path'" "`results_data_path'"  	///
+								"`spline_min'" "`spline_max'" 			///
+								"`time_of_cure'" "`disease'"
+
+/* create file with artificial patients (all combinations of patient characteristics) to estimate predictions for */
+quietly cd "`path_ado_files'"
+run 4_create_predict_file.ado
+create_predict_file "`max_since_years'" "`bool_CI'" "`bool_stage'" "`spline_min'" "`spline_max'" "`strs_path'" ///
+				"`results_data_path'" "`disease'" ///
+				"`start_year'" "`end_year'" "`min_age'" "`max_age'"
 
 if ("`bool_SA'" == "no"){
 	/* Fit flexible parametric survival model and make predictions */ 
@@ -120,7 +120,7 @@ if ("`bool_SA'" == "no"){
 	}
 	else if (`max_since_years' > 0) {
 		/* Conditional LOLE */
-		forval i = 7(`step')`max_since_years'{
+		forval i = 0(`step')`max_since_years'{
 		    display "`i'-year conditional LOLE"
 			LOLE_analysis "`i'" "`bool_CI'" "`bool_stage'" "`df_spline_year'" "`df_spline_age'" "`df_baseline'" "`df_TD'" ///
 					"`max_CBS_age'" "`max_fupdat'" 				///
