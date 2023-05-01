@@ -9,7 +9,7 @@ if(!is.null(dev.list())) dev.off()
 cat('\014')
 
 # set parameters
-file.path <- "G:/IKNL/Registratie en Onderzoek/Onderzoek/projecten lopend/LOLE/Hoog-over/Results/Review/Cancer deaths"
+file.path <- #
 diseases <- c("ALL", "BLAD", "CERV", 
               "CNS", "CRC", "ECS", "ENDO", "FBRE", 
               "HN", "HPB", 
