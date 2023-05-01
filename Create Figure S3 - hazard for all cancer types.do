@@ -1,17 +1,16 @@
 capture drop *
 capture program drop *
 
-cd "G:\IKNL\Registratie en Onderzoek\stata\strs"
+cd #
 
-local results_data_path = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\\`disease'"
-local combined_figure_path = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Results\Review"
+local results_data_path = #
+local combined_figure_path = #
 local max_fupdat = 2021
 local max_CBS_age = 95
 local min_age = 18
 local tinf_val = 100 - `min_age'
 local bool_stage = "without_stage"
 
-// local diseases " "CNS" "
 local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "SCC" "TEST" "THY" "ALL" "
 
 foreach disease in `diseases'{
@@ -137,18 +136,6 @@ foreach disease in `diseases'{
 		quietly stpm2 syr* fem* sag*, scale(hazard) df(`df_baseline') bhazard(rate) tvc(syr* fem* sag*) dftvc(`df_TD')
 	}
 	
-	// cure model
-	// TODO: no time-varying variables in cure model?
-	// quietly stpm2 fem sag* syr*, scale(hazard) df(`df_baseline') bhazard(rate) cure
-	
-	// baseline survival function: predict base_hz, survival zeros
-	// log cumulative hazard: predict logCH, xb zeros
-	// survival function: predict surv, survival zeros
-
-	// hazard function
-	// The zeros option sets the values of all covariates, other than those specified in the the at() option, to zero.
-	predict hz, hazard zeros 
-
 	// plots
 	twoway (line hz _t, sort), ///
 		ytitle("") ///
