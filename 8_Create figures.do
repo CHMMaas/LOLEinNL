@@ -7,7 +7,7 @@ capture drop *
 capture program drop *
 
 /* Set directory */
-local combined_figure_path = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Results\"
+local combined_figure_path = #
 cd "`combined_figure_path'\Figures"
 
 /* Figure 2 LE CI cancer patients and LE general population */
