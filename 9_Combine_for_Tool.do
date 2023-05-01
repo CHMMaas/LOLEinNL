@@ -9,8 +9,8 @@ gen type = ""
 local diseases " "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "TEST" "THY" "ALL" "
 use "`data_path'\file_for_tool.dta", clear
 foreach dis in `diseases'{
-	display "`dis'\results_`dis'_CLOLE_multiple_with_CI_with_stage.dta"
-	append using #, nolabel
+	display "`dis'"
+	append using "#\results_`dis'_CLOLE_multiple_with_CI_with_stage.dta", nolabel
     replace type = "`dis'" if mi(type)
 }
 
