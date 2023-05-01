@@ -64,7 +64,7 @@ display "Min. df time-dep:   `TD_min'"
 display "Max. df time-dep:   `TD_max'" 
 
 /* Directory that is the same for all diseases: */
-local strs_path = "G:\IKNL\Registratie en Onderzoek\stata\strs"
+local strs_path = #
 
 /* Prepare general population
    do not smooth general population */
