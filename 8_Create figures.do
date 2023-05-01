@@ -150,7 +150,7 @@ foreach gender_bool in 1 2 {
 	foreach dis in `diseases'{
 		file write fig5_`gender' "`dis'"
 		foreach age_val in "45" "65" "75"{
-			use "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\\`dis'\results_`dis'_CLOLE_multiple_with_CI_without_stage", replace
+			use "#\results_`dis'_CLOLE_multiple_with_CI_without_stage", replace
 			summarize ll_0 if jaar == 1989 & geslacht == `gender_bool' & age == `age_val'
 			local LOLE1989 = (r(mean))
 			summarize ll_0 if jaar == 2019 & geslacht == `gender_bool' & age == `age_val'
@@ -193,7 +193,7 @@ foreach gender_bool in 1 2 {
 	foreach dis in `diseases'{
 		file write fig6_`gender' "`dis'"
 		foreach stage_num in "1" "2" "3"{
-			use "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\\`dis'\results_`dis'_CLOLE_multiple_with_CI_with_stage", replace
+			use "#\results_`dis'_CLOLE_multiple_with_CI_with_stage", replace
 			summarize ll_0 if jaar == 1989 & geslacht == `gender_bool' & age == 65 & stage`stage_num' == 1
 			local LOLE1989 = (r(mean))
 			summarize ll_0 if jaar == 2019 & geslacht == `gender_bool' & age == 65 & stage`stage_num' == 1
