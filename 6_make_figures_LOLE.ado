@@ -19,7 +19,7 @@ args disease bool_CI bool_stage age1 age2 age3 age4 min_age max_age ///
 capture drop *
 
 local xaxislabel_year = "`start_year' 2004 `end_year'"
-local combined_figure_path = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Results\Figures"
+local combined_figure_path = #
 
 if ("`bool_stage'" == "without_stage"){	
 	local lightmale = "110 212 244"
