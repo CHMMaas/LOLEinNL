@@ -12,7 +12,6 @@ local min_age = 18
 local tinf_val = 100 - `min_age'
 local bool_stage = "without_stage"
 
-// local diseases " "ALL" "
 local diseases " "BLAD" "CERV" "CNS" "CRC" "ECS" "ENDO" "FBRE" "HN" "HPB" "KIDN" "LUNG" "MEL" "OFT" "PROST" "SCC" "TEST" "THY" "ALL" "
 capture file close CancerDeaths
 file open CancerDeaths using "#\Cancer_Deaths.txt", write replace
