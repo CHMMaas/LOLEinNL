@@ -19,7 +19,7 @@ capture drop *
 display "Select patient population"
 
 /* A copy of the kern.dta set in G:\IKNL\Registratie en Onderzoek\onderzoeksbestanden\STATAData\RANK\Kern\kern.dta */
-/* open kern dataset */			quietly use "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Data\kern1508.dta", clear
+/* open kern dataset */			quietly use #, clear
 								display _N
 								
 /* rename year at diagnosis */	gen jaar = incjr
