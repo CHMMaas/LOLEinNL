@@ -14,12 +14,12 @@ set dp comma, perm
 capture program drop make_figures_LOLE
 program make_figures_LOLE
 args disease bool_CI bool_stage age1 age2 age3 age4 min_age max_age ///
-		year1 year2 year3 year4 start_year end_year results_data_path ///
+		start_year end_year results_data_path ///
 		max_since_years step
 capture drop *
 
 local xaxislabel_year = "`start_year' 2004 `end_year'"
-local combined_figure_path = #
+local combined_figure_path = "G:\IKNL\Registratie en Onderzoek\Onderzoek\projecten lopend\LOLE\Hoog-over\Results\Figures"
 
 if ("`bool_stage'" == "without_stage"){	
 	local lightmale = "110 212 244"

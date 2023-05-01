@@ -19,7 +19,7 @@ capture program drop LOLE_analysis
 program LOLE_analysis
 args years_cond bool_CI bool_stage df_spline_year df_spline_age df_baseline df_TD max_CBS_age ///
 		max_fupdat strs_path results_data_path path_ado_files disease ///
-		age1 age2 age3 age4 min_age max_age year1 year2 year3 year4 start_year end_year max_since_years multiple
+		age1 age2 age3 age4 min_age max_age start_year end_year max_since_years multiple
 capture drop *
 display "Estimate LOLE"
 

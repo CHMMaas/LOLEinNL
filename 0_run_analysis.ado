@@ -22,7 +22,6 @@ args path_ado_files data_path results_data_path SA_path ///
 		df_TD time_of_cure 						 		///
 		max_since_years step 					 		///
 		bool_CI bool_stage 						 		///
-		year1 year2 year3 year4 				 		///
 		age1 age2 age3 age4 					 		///
 		bool_SA spline_min spline_max 			 		///
 		baseline_min baseline_max 				 		///
@@ -53,7 +52,6 @@ display "Max CLOLE:          `max_since_years'"
 display "In steps of:        `step'"
 display "Compute CI:         `bool_CI'"
 display "Add stage to model: `bool_stage'"
-display "Years in results:   `year1', `year2', `year3', `year4'"
 display "Ages in results:    `age1', `age2', `age3', `age4'"
 
 display "Check parameters of sensitivity analysis:"
@@ -66,7 +64,7 @@ display "Min. df time-dep:   `TD_min'"
 display "Max. df time-dep:   `TD_max'" 
 
 /* Directory that is the same for all diseases: */
-local strs_path = #
+local strs_path = "G:\IKNL\Registratie en Onderzoek\stata\strs"
 
 /* Prepare general population
    do not smooth general population */
@@ -115,7 +113,6 @@ if ("`bool_SA'" == "no"){
 					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
 					"`age1'" "`age2'" "`age3'" "`age4'" 			///
 					"`min_age'" "`max_age'" 						///
-					"`year1'" "`year2'" "`year3'" "`year4'" 		///
 					"`start_year'" "`end_year'" "`max_since_years'" "single"
 	}
 	else if (`max_since_years' > 0) {
@@ -127,7 +124,6 @@ if ("`bool_SA'" == "no"){
 					"`strs_path'" "`results_data_path'" "`path_ado_files'" "`disease'" ///
 					"`age1'" "`age2'" "`age3'" "`age4'" 		///
 					"`min_age'" "`max_age'" 					///
-					"`year1'" "`year2'" "`year3'" "`year4'" 	///
 					"`start_year'" "`end_year'" "`max_since_years'" "multiple"
 		}
 	}
@@ -138,7 +134,6 @@ if ("`bool_SA'" == "no"){
 	make_figures_LOLE "`disease'" "`bool_CI'" "`bool_stage'" 	///
 				"`age1'" "`age2'" "`age3'" "`age4'" 			///
 				"`min_age'" "`max_age'" 						///
-				"`year1'" "`year2'" "`year3'" "`year4'"			///
 				"`start_year'" "`end_year'" 					///
 				"`results_data_path'" 							///
 				"`max_since_years'" "`step'"
