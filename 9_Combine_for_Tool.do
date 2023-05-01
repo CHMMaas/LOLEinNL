@@ -1,5 +1,5 @@
 local dis = "BLAD"
-use #, clear
+use "#\results_`dis'_CLOLE_multiple_with_CI_with_stage.dta", clear
 gen type = "`dis'"
 local data_path = #
 save "`data_path'\file_for_tool.dta", replace
