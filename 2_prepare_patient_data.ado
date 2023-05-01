@@ -18,7 +18,6 @@ args data_path results_data_path min_year max_year max_fupdat min_age max_age di
 capture drop *
 display "Select patient population"
 
-/* A copy of the kern.dta set in G:\IKNL\Registratie en Onderzoek\onderzoeksbestanden\STATAData\RANK\Kern\kern.dta */
 /* open kern dataset */			quietly use #, clear
 								display _N
 								
